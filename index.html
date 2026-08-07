@@ -9,14 +9,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3yn0p/WxLvTUqPP2ZMU4zMZtYkzM=" crossorigin="">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="geogis.css">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
   <header class="masthead">
     <a class="wordmark" href="#top"><span class="mark">Z</span> ZIA<span>WOLF</span></a>
     <nav aria-label="Primary navigation">
-      <a href="#network">Network</a><a href="#projects">Projects</a><a href="#aizia">AIZIA</a><a href="#signal">Signal</a>
+      <a href="#network">Network</a><a href="#projects">Projects</a><a href="#geogis">GeoGIS</a><a href="#aizia">AIZIA</a><a href="#signal">Signal</a>
     </nav>
     <div class="live"><i></i> HIGH DESERT / ONLINE</div>
   </header>
@@ -88,10 +90,31 @@
       </div>
     </section>
 
+    <section class="geogis" id="geogis">
+      <div class="section-head geo-head"><p class="section-no">03 / NM GeoGIS</p><h2>See the<br>whole network.</h2><p>Fiber · LEO · ISP · NOC/SOC<br><span class="prototype-flag">PROTOTYPE TELEMETRY</span></p></div>
+      <div class="geo-shell">
+        <aside class="geo-rail left-rail">
+          <div class="rail-title"><span class="pulse-dot"></span>NOC // NETWORK</div>
+          <div class="metric"><span>FIBER SOURCE</span><strong>OBAE / FCC</strong><small>PUBLIC DATA</small></div>
+          <div class="metric"><span>LEO TELEMETRY</span><strong>NO LIVE FEED</strong><small>OPERATOR AUTH REQUIRED</small></div>
+          <div class="metric"><span>ACTIVE OUTAGES</span><strong>—</strong><small>NO VERIFIED FEED</small></div>
+          <div class="metric"><span>MAP STATE</span><strong>READY</strong><small>35.1°N / 106.0°W</small></div>
+          <div class="layer-controls"><p>LAYERS</p><label><input type="checkbox" data-layer="fiber" checked><i class="key fiber-key"></i>Fiber corridors*</label><label><input type="checkbox" data-layer="leo" checked><i class="key leo-key"></i>LEO zones*</label><label><input type="checkbox" data-layer="outage" checked><i class="key outage-key"></i>Outage scenarios*</label><small>* Schematic / simulated until an authoritative GIS or telemetry feed is connected.</small></div>
+        </aside>
+        <div class="map-stage"><div class="map-banner"><span>NEW MEXICO // CONNECTIVITY OPERATIONS PICTURE</span><span id="mapClock">UTC --:--:--</span></div><div id="nmMap" role="application" aria-label="Interactive New Mexico connectivity operations map"></div><div class="map-corner"><b>ZIAWOLF // GEOGIS</b><span>UNCLASSIFIED · PROTOTYPE</span></div></div>
+        <aside class="geo-rail right-rail">
+          <div class="rail-title"><span class="shield">◇</span>SOC // SECURITY</div>
+          <div class="metric"><span>SECURITY FEED</span><strong>NO LIVE FEED</strong><small>SIEM / EDR READY</small></div><div class="metric"><span>EDGE EVENTS</span><strong>—</strong><small>AWAITING SOURCE</small></div><div class="metric"><span>THREAT POSTURE</span><strong>MONITOR</strong><small>PROTOTYPE STATE</small></div>
+          <div class="incident-stack"><p>SCENARIO QUEUE</p><button class="incident" data-focus="abq"><i class="sev amber"></i><span><b>FIBER DEGRADATION</b><small>I-25 / CENTRAL · SIMULATED</small></span></button><button class="incident" data-focus="gallup"><i class="sev red"></i><span><b>BACKHAUL LOSS</b><small>I-40 / WEST · SIMULATED</small></span></button><button class="incident" data-focus="lascruces"><i class="sev cyan"></i><span><b>LEO LATENCY</b><small>SOUTHERN NM · SIMULATED</small></span></button></div>
+        </aside>
+      </div>
+      <div class="source-bar"><span>AUTHORITATIVE / PUBLIC SOURCES</span><a href="https://maps.connect.nm.gov/" target="_blank" rel="noopener">NM OBAE MAP ↗</a><a href="https://broadbandmap.fcc.gov/" target="_blank" rel="noopener">FCC BROADBAND MAP ↗</a><a href="https://broadbandmap.fcc.gov/data-download" target="_blank" rel="noopener">FCC DATA DOWNLOAD ↗</a><a href="https://www.fcc.gov/network-outage-reporting-system-nors" target="_blank" rel="noopener">FCC NORS ↗</a><a href="https://starlink.com/networkupdate" target="_blank" rel="noopener">STARLINK UPDATE ↗</a></div>
+    </section>
+
     <section class="aizia" id="aizia">
       <div class="aizia-symbol" aria-hidden="true"><span>A</span><b>I</b><span>ZIA</span></div>
       <div class="aizia-copy">
-        <p class="section-no">03 / Experimental Signal</p>
+        <p class="section-no">04 / Experimental Signal</p>
         <h2>AI <em>meets</em> Zia.</h2>
         <p class="lead">AIZIA is a design study inside ZiaWolf: a visual shorthand for artificial intelligence born under a New Mexico sun.</p>
         <p>Not a separate company announcement. Not a replacement for ZiaWolf. It is a signal we are exploring — the intersection of machine intelligence, local identity, transparency and human stewardship.</p>
@@ -100,7 +123,7 @@
     </section>
 
     <section class="factory" id="signal">
-      <div class="section-head"><p class="section-no">04 / The Factory</p><h2>Human intent.<br>Machine velocity.</h2><p>AI augments the craft. People own the outcome.</p></div>
+      <div class="section-head"><p class="section-no">05 / The Factory</p><h2>Human intent.<br>Machine velocity.</h2><p>AI augments the craft. People own the outcome.</p></div>
       <div class="agent-board" id="agentBoard" aria-label="AI software factory roles"></div>
       <div class="terminal"><div class="terminal-bar"><span>WATER_SCRIBE // ZIAWOLF NEXUS</span><span class="terminal-status">● READY</span></div><div id="terminalOutput">&gt; Connected to the high-desert knowledge mesh.<br>&gt; Mission profiles available: WATER · CYBER · CLOUD · DELIVERY<br>&gt; Select a signal above to inspect the crew.</div></div>
     </section>
@@ -113,6 +136,7 @@
   </main>
 
   <footer><a class="wordmark" href="#top"><span class="mark">Z</span> ZIA<span>WOLF</span></a><p>High Desert Intelligence<br>New Mexico · MMXXVI</p><p class="signoff">Stay sharp. Stay strange.<br>— Jack Nightshade</p></footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="site.js"></script>
 </body>
 </html>
