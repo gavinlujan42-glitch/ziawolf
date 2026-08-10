@@ -1,31 +1,63 @@
 const agents = [
-  ["DISCOVERY","Interviewer","Turns daily work into stories, epics and acceptance criteria."],
-  ["PROCESS","Workflow Scribe","Captures the real routine, decisions, handoffs and friction."],
-  ["DATA","DBA","Models durable data, migrations, integrity and performance."],
-  ["ANALYSIS","Business Analyst","Connects mission outcomes to system behavior."],
-  ["DELIVERY","Product Lead","Protects priorities, outcomes and the product boundary."],
-  ["AGILE","Scrum Master","Keeps the delivery system moving and impediments visible."],
-  ["ENGINEERING","Software Architect","Shapes APIs, services, integration and technical runway."],
-  ["SECURITY","CISO","Threat-models the work and keeps trust measurable."],
-  ["PLATFORM","Cloud Engineer","Builds observable, portable and cost-aware infrastructure."],
-  ["QUALITY","Test Engineer","Turns assumptions into repeatable evidence."],
-  ["WATER","Water Scribe","Connects water knowledge, records, GIS and human questions."],
-  ["GOVERNANCE","Chief of Staff","Keeps decisions, risk, accountability and communication aligned."]
+  ["DISCOVERY","Process Interviewer","Turns daily work into stories, epics and acceptance criteria.","Product Owner"],
+  ["PROCESS","Workflow Scribe","Captures the real routine, decisions, handoffs and friction.","Business Analyst"],
+  ["DATA","Data Architect","Models durable data, migrations, provenance and performance.","Lead DBA"],
+  ["ANALYSIS","Business Analyst","Connects mission outcomes to system behavior.","Product Manager"],
+  ["DELIVERY","Product Lead","Protects priorities, outcomes and the product boundary.","Executive Sponsor"],
+  ["AGILE","Scrum Master","Keeps the delivery system moving and impediments visible.","Delivery Manager"],
+  ["ENGINEERING","Software Architect","Shapes APIs, services, integration and technical runway.","Chief Architect"],
+  ["SECURITY","Security Engineer","Threat-models the work and keeps trust measurable.","CISO"],
+  ["PLATFORM","Cloud Engineer","Builds observable, portable and cost-aware infrastructure.","Operations Lead"],
+  ["QUALITY","Evaluation Engineer","Turns assumptions into repeatable evidence.","Release Manager"],
+  ["DOMAIN","Knowledge Scribe","Connects records, policy, GIS and human questions.","Domain Expert"],
+  ["GOVERNANCE","Chief of Staff","Keeps decisions, risk, accountability and communication aligned.","Program Executive"]
 ];
 
 const board = document.querySelector('#agentBoard');
 const output = document.querySelector('#terminalOutput');
 
-agents.forEach(([code,name,mission], index) => {
+agents.forEach(([code,name,mission,owner], index) => {
   const button = document.createElement('button');
   button.className = 'agent';
   button.innerHTML = `<b>${String(index + 1).padStart(2,'0')} // ${code}</b><strong>${name}</strong><small>SELECT SIGNAL ↘</small>`;
   button.addEventListener('click', () => {
     document.querySelectorAll('.agent').forEach(el => el.classList.remove('active'));
     button.classList.add('active');
-    output.innerHTML = `&gt; SIGNAL ${String(index + 1).padStart(2,'0')} ACQUIRED<br>&gt; ROLE: ${name.toUpperCase()}<br>&gt; MISSION: ${mission}<br>&gt; STATUS: READY FOR HUMAN DIRECTION`;
+    output.innerHTML = `&gt; ROLE ${String(index + 1).padStart(2,'0')} ACQUIRED<br>&gt; AI CAPABILITY: ${name.toUpperCase()}<br>&gt; MISSION: ${mission}<br>&gt; ACCOUNTABLE HUMAN: ${owner.toUpperCase()}<br>&gt; RELEASE AUTHORITY: HUMAN GATE REQUIRED`;
   });
   board.appendChild(button);
+});
+
+const stages = [
+  ["DISCOVER","Interview users, observe the actual process and convert friction into measurable outcomes.","Product Owner"],
+  ["MAP","Model workflows, decisions, data, handoffs, risks and acceptance criteria.","Business Analyst"],
+  ["ARCHITECT","Define secure, accessible and portable solution patterns before code accelerates.","Chief Architect"],
+  ["BUILD","Compose focused engineering agents around a governed backlog and shared standards.","Engineering Lead"],
+  ["SECURE","Threat-model continuously and collect control evidence as the product evolves.","CISO / Security Officer"],
+  ["VALIDATE","Test behavior, accessibility, performance and AI quality against explicit evidence.","Release Manager"],
+  ["DEPLOY","Release observable, reversible software into an agency-approved environment.","Operations Lead"],
+  ["IMPROVE","Use feedback and telemetry to prioritize the next measurable outcome.","Product Manager"]
+];
+const pipeline = document.querySelector('#pipeline');
+const pipelineDetail = document.querySelector('#pipelineDetail');
+stages.forEach(([name,description,owner], index) => {
+  const button = document.createElement('button');
+  button.className = `stage${index === 0 ? ' active' : ''}`;
+  button.innerHTML = `<b>${String(index + 1).padStart(2,'0')}</b><span>${name}</span><i>↘</i>`;
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.stage').forEach(el => el.classList.remove('active'));
+    button.classList.add('active');
+    pipelineDetail.innerHTML = `<span>${String(index + 1).padStart(2,'0')} / ${name}</span><strong>${description}</strong><p>${description}</p><small>HUMAN GATE · ${owner.toUpperCase()}</small>`;
+  });
+  pipeline?.appendChild(button);
+});
+
+document.querySelector('#challengeForm')?.addEventListener('submit', event => {
+  event.preventDefault();
+  const data = new FormData(event.currentTarget);
+  const workflow = String(data.get('workflow')).trim();
+  const outcome = data.get('outcome');
+  document.querySelector('#formNote').textContent = `PILOT BRIEF READY: Discover and map “${workflow}”; establish a baseline; validate “${outcome}”; then define the smallest secure, accessible release. No information was transmitted.`;
 });
 
 const header = document.querySelector('.masthead');
