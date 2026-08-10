@@ -18,7 +18,7 @@
   <header class="masthead">
     <a class="wordmark" href="#top"><span class="mark">Z</span> ZIA<span>WOLF</span></a>
     <nav aria-label="Primary navigation">
-      <a href="#factory">Factory</a><a href="#products">Products</a><a href="#geogis">GeoGIS</a><a href="#trust">Trust</a><a href="#challenge">Start a pilot</a>
+      <a href="#factory">Factory</a><a href="#products">Products</a><a href="#tips">Tips</a><a href="#trust">Trust</a><a href="#challenge">Start a pilot</a>
     </nav>
     <div class="live"><i></i> HIGH DESERT / ONLINE</div>
   </header>
@@ -143,6 +143,32 @@
         <button type="submit">Generate pilot brief <span>↗</span></button>
         <p class="form-note" id="formNote">This prototype keeps entries in your browser and does not transmit agency information.</p>
       </form>
+    </section>
+
+    <section class="field-manual" id="tips">
+      <div class="section-head"><p class="section-no">08 / ZiaWolf Field Manual</p><h2>Pragmatic signals<br>for builders.</h2><p>Searchable engineering guidance adapted to the ZIAIQ delivery lifecycle.</p></div>
+      <div class="manual-console">
+        <div class="manual-controls">
+          <label for="tipSearch">Search the field manual</label>
+          <div class="manual-search"><span aria-hidden="true">⌕</span><input id="tipSearch" type="search" placeholder="Search craft, testing, teams…" autocomplete="off"></div>
+          <div class="manual-filters" id="tipFilters" aria-label="Filter engineering tips">
+            <button class="active" data-tip-filter="all">All signals</button>
+            <button data-tip-filter="craft">Craft</button>
+            <button data-tip-filter="design">Design</button>
+            <button data-tip-filter="delivery">Delivery</button>
+            <button data-tip-filter="quality">Quality</button>
+            <button data-tip-filter="teams">Teams</button>
+          </div>
+          <p><span id="tipCount">00</span> FIELD NOTES MATCHED</p>
+        </div>
+        <div class="tips-grid" id="tipsGrid" aria-live="polite"></div>
+        <p class="tips-empty" id="tipsEmpty" hidden>No field notes match that signal. Try another term or filter.</p>
+      </div>
+      <div class="manual-checklists">
+        <article><span>CHECKLIST 01</span><h3>Program deliberately.</h3><ul><li>Proceed from a visible plan.</li><li>Document and test assumptions.</li><li>Rely only on evidence.</li><li>Refuse accidental complexity.</li></ul></article>
+        <article><span>CHECKLIST 02</span><h3>Debug the system.</h3><ul><li>Separate symptoms from causes.</li><li>Reproduce with real conditions.</li><li>Explain the failure out loud.</li><li>Turn every found bug into a test.</li></ul></article>
+        <article><span>CHECKLIST 03</span><h3>Release with confidence.</h3><ul><li>Validate mission outcomes.</li><li>Test recovery and exhaustion.</li><li>Verify security and accessibility.</li><li>Keep rollback observable.</li></ul></article>
+      </div>
     </section>
 
     <section class="nightshade">

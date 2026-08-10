@@ -60,6 +60,117 @@ document.querySelector('#challengeForm')?.addEventListener('submit', event => {
   document.querySelector('#formNote').textContent = `PILOT BRIEF READY: Discover and map “${workflow}”; establish a baseline; validate “${outcome}”; then define the smallest secure, accessible release. No information was transmitted.`;
 });
 
+const fieldNotes = [
+  [1,"craft","Care about the craft","Software is public infrastructure when people depend on it. Build as though the outcome carries your signature."],
+  [2,"craft","Think about the work","Turn off autopilot. Question the goal, the approach and the evidence while you build."],
+  [3,"teams","Bring options, not excuses","Describe what is possible, the tradeoffs involved and the decision that needs an owner."],
+  [4,"quality","Repair broken windows","Address weak designs, misleading data and unsafe shortcuts before they become the accepted standard."],
+  [5,"teams","Be a catalyst for change","Make the future tangible with a working example, then invite people to shape it."],
+  [6,"design","Keep the whole system visible","Details matter, but so do dependencies, users, policy, operations and the mission beyond the screen."],
+  [7,"quality","Make quality explicit","Let users and operators define what good, safe and useful actually mean."],
+  [8,"craft","Invest in your knowledge portfolio","Learn continuously, diversify your tools and revisit assumptions that once seemed settled."],
+  [9,"craft","Analyze what you hear","Treat vendor promises, industry fashions and AI outputs as claims requiring context and evidence."],
+  [10,"teams","Communicate for the audience","A strong idea has little value if the people who must act cannot understand it."],
+  [11,"design","Keep one source of truth","Represent each important fact authoritatively and derive copies wherever possible."],
+  [12,"design","Make the right thing easy to reuse","Good patterns spread when they are discoverable, documented and simpler than reinvention."],
+  [13,"design","Decouple unrelated change","Give components clear purposes and boundaries so one decision does not shake the whole system."],
+  [14,"design","Plan for decisions to evolve","Record why a choice was made, isolate it and preserve a credible path to change."],
+  [15,"delivery","Use tracer releases","Deliver a thin end-to-end path early, observe where it lands and correct course with evidence."],
+  [16,"delivery","Prototype to learn","A prototype earns its keep through reduced uncertainty—not through the amount of code produced."],
+  [17,"design","Speak the domain language","Use the words your users use in interfaces, models, stories and tests."],
+  [18,"delivery","Estimate to expose uncertainty","Forecast before starting so hidden assumptions, dependencies and risks become discussable."],
+  [19,"delivery","Update the plan with reality","Use each sprint to refine time, scope and risk instead of defending an obsolete estimate."],
+  [20,"craft","Keep durable knowledge portable","Favor open, searchable formats for decisions, configuration, documentation and evidence."],
+  [21,"craft","Automate repetitive text work","Let scripts handle repeatable transformations so people can focus on judgment."],
+  [22,"craft","Master the tools you use daily","Configure your editor, shell and review workflow until they support thought instead of interrupting it."],
+  [23,"delivery","Always use version control","Every meaningful artifact needs history, authorship and a safe path backward."],
+  [24,"teams","Fix the problem, not the blame","Restore service, learn from the system and improve the guardrail."],
+  [25,"quality","Do not panic while debugging","Slow down, reproduce the behavior and test one hypothesis at a time."],
+  [26,"quality","Challenge the nearest assumption","The exotic explanation is rarely the first one worth testing."],
+  [27,"quality","Prove it in the real environment","Validate assumptions with representative data, boundary conditions and deployment constraints."],
+  [28,"delivery","Generate repeatable work","Use templates and automation to remove duplication while keeping generated output understandable."],
+  [29,"quality","Design for inevitable failure","Protect users and data with validation, recovery, observability and clear failure modes."],
+  [30,"design","Make contracts explicit","Define what a component accepts, guarantees and refuses—then test those promises."],
+  [31,"quality","Fail early and visibly","A clear stop near the cause is safer than corrupted work continuing silently."],
+  [32,"quality","Assert the impossible","Encode critical invariants so violated assumptions produce evidence immediately."],
+  [33,"design","Own the full resource lifecycle","The component that acquires a resource should make its safe release unavoidable."],
+  [34,"design","Minimize coupling","Keep modules shy, interfaces narrow and dependencies intentional."],
+  [35,"design","Put details in configuration","Keep policy and environment choices outside core behavior when they must change independently."],
+  [36,"design","Design services around capability","Give each service a coherent responsibility, stable boundary and observable contract."],
+  [37,"design","Separate views from models","Protect mission logic from presentation choices so each can evolve cleanly."],
+  [38,"design","Coordinate agents through shared facts","Use governed work queues and evidence stores rather than hidden agent-to-agent assumptions."],
+  [39,"craft","Do not build by coincidence","Understand why the system works before depending on the behavior."],
+  [40,"quality","Test performance where it matters","Measure with representative load in the target environment instead of trusting theory alone."],
+  [41,"quality","Refactor early and often","Remove structural debt while the context and evidence are still fresh."],
+  [42,"quality","Design to test","Define observable behavior and acceptance evidence before implementation begins."],
+  [43,"quality","Test before users have to","Automate critical paths, risks and regressions as part of every build."],
+  [44,"craft","Understand generated code","AI-generated or scaffolded code remains your responsibility. Read it, test it and own it."],
+  [45,"delivery","Dig for requirements","Observe real work beneath stated requests, legacy habits and organizational assumptions."],
+  [46,"teams","Work beside the user","Shared context reveals needs that interviews and documents alone cannot surface."],
+  [47,"design","Invest in durable abstractions","Technologies rotate; sound domain boundaries and contracts last longer."],
+  [48,"teams","Maintain a shared glossary","Give project language one visible, governed home."],
+  [49,"delivery","Find the real constraint","Before accepting an impossible problem, ask what must be true and what is merely customary."],
+  [50,"delivery","Build when evidence is sufficient","Do not let specification become a substitute for learning through working software."],
+  [51,"craft","Use methods deliberately","Adopt practices because they improve this system—not because they carry prestige."],
+  [52,"craft","Judge tools by outcomes","Price, popularity and novelty are not evidence of fit."],
+  [53,"teams","Organize around outcomes","Keep design, engineering, data, security and testing close to the mission slice they share."],
+  [54,"delivery","Automate repeatable procedures","If a process must happen the same way twice, make it executable and observable."],
+  [55,"quality","Test early, often and automatically","Fast feedback belongs in every commit and every release path."],
+  [56,"quality","The build is not done until tests pass","A release without evidence is only a claim."],
+  [57,"quality","Test the tests","Use controlled faults and mutation to verify that the safety net can actually detect failure."],
+  [58,"quality","Cover states, not merely lines","Test meaningful conditions, transitions, permissions and recovery paths."],
+  [59,"quality","Find each bug once","Convert every human-discovered defect into a durable regression check."],
+  [60,"delivery","Build documentation in","Generate operational and technical knowledge from the same sources that drive the product."],
+  [61,"teams","Exceed expectations gently","Understand the promised outcome, deliver it reliably and add only what creates real value."],
+  [62,"craft","Sign your work","Make ownership visible and produce work you can defend with evidence."],
+  [63,"quality","Test accessibility as behavior","Keyboard, contrast, semantics and assistive technology belong in acceptance criteria."],
+  [64,"quality","Treat security as a continuous test","Threat models and control evidence evolve with every architecture and code change."],
+  [65,"delivery","Keep releases reversible","Use small changes, observable health and practiced rollback paths."],
+  [66,"teams","Name the accountable human","Agents can produce work; only people approve risk and own outcomes."],
+  [67,"design","Capture provenance","Record where data, decisions and AI-generated content came from and how they changed."],
+  [68,"delivery","Measure mission outcomes","Velocity is useful only when it improves service, safety, cost or trust."],
+  [69,"design","Prefer portable architecture","Keep agency data and mission capability separable from any single vendor."],
+  [70,"craft","Leave the system stronger","Each change should improve the product, the evidence and the team’s ability to make the next change."]
+];
+
+let activeTipFilter = 'all';
+const tipSearch = document.querySelector('#tipSearch');
+const tipsGrid = document.querySelector('#tipsGrid');
+const tipCount = document.querySelector('#tipCount');
+const tipsEmpty = document.querySelector('#tipsEmpty');
+
+function renderFieldNotes() {
+  const query = tipSearch?.value.toLowerCase().trim() || '';
+  const matches = fieldNotes.filter(([,category,title,description]) =>
+    (activeTipFilter === 'all' || category === activeTipFilter) &&
+    `${title} ${description}`.toLowerCase().includes(query)
+  );
+  if (tipCount) tipCount.textContent = String(matches.length).padStart(2,'0');
+  if (tipsEmpty) tipsEmpty.hidden = matches.length > 0;
+  if (!tipsGrid) return;
+  tipsGrid.replaceChildren(...matches.map(([id,category,title,description]) => {
+    const article = document.createElement('article');
+    article.className = 'tip-card';
+    const meta = document.createElement('span');
+    meta.textContent = `${String(id).padStart(2,'0')} // ${category.toUpperCase()}`;
+    const heading = document.createElement('h3');
+    heading.textContent = title;
+    const copy = document.createElement('p');
+    copy.textContent = description;
+    article.append(meta, heading, copy);
+    return article;
+  }));
+}
+
+tipSearch?.addEventListener('input', renderFieldNotes);
+document.querySelectorAll('[data-tip-filter]').forEach(button => button.addEventListener('click', () => {
+  document.querySelectorAll('[data-tip-filter]').forEach(item => item.classList.remove('active'));
+  button.classList.add('active');
+  activeTipFilter = button.dataset.tipFilter;
+  renderFieldNotes();
+}));
+renderFieldNotes();
+
 const header = document.querySelector('.masthead');
 addEventListener('scroll', () => header.style.borderBottomColor = scrollY > 40 ? 'rgba(71,197,184,.25)' : 'rgba(238,232,219,.15)', {passive:true});
 
